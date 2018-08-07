@@ -3,7 +3,7 @@ select event_id, state, event_type, road, road_direction, start_mp, end_mp, actu
 Select  distinct event_id , state, event_type, road, road_direction, start_mp, end_mp, actual_start, last_update ,
   ( last_update -actual_start) duration 
  from event_arch_report  
-where   actual_start > '2017-1-1 0:0:0'  and actual_start < '2017-7-1 0:0:0' 
+where   actual_start > '2018-1-1 0:0:0'  and actual_start < '2018-7-1 0:0:0' 
     and road = 'I-90' and start_mp > 61 and end_mp < 78
 ) t1
 inner join
