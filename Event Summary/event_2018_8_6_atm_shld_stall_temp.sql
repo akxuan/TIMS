@@ -1,8 +1,8 @@
-create table event_2018_8_6_atm_shld_stall_temp as
-select event_id, state, event_type, road, road_direction, start_mp, end_mp, actual_start, actual_end,duration,main_block,shoulder_block from (
-Select  distinct event_id , state, event_type, road, road_direction, start_mp, end_mp, actual_start, actual_end ,
-  ( actual_end -actual_start) duration 
-    from event_arch_report  
+create  table event_2018_8_6_atm_shld_stall_temp as
+select event_id, state, event_type, road, road_direction, start_mp, end_mp, actual_start, last_update,duration,main_block,shoulder_block from (
+Select  distinct event_id , state, event_type, road, road_direction, start_mp, end_mp, actual_start, last_update ,
+  ( last_update -actual_start) duration 
+ from event_arch_report  
 where event_type in (1,2,5,8,9,19,14)  and actual_start > '2017-1-1 0:0:0'  and actual_start < '2017-7-1 0:0:0' 
     and road = 'I-90' and start_mp > 61 and end_mp < 78
 ) t1
@@ -12,3 +12,4 @@ inner join
 inner join
 (select event_id,   max( LENgth(REPLACE(blocked, 'N', '')))  shoulder_block from event_lane_status_arch 
  where lane_type in (2,3) group by event_id) t3 using (event_id)
+
